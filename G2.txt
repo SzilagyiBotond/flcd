@@ -1,0 +1,22 @@
+program statement statement_list type arraytype declaration_statement assignment_statement arithmetic expression int_expression string_expression compound_statement if_statement while_statement condition relation loop_statement io_statement return_statement
+IDENTIFIER constant integer char string loop return to by : input print ; { } ( ) array [ ] + - * / < > => =< ! != == = declare <newline> <indent> if else while and or
+program
+program->statement_list
+statement_list->statement|statement statement_list
+statement->declaration_statement|assignment_statement|if_statement|loop_statement|while_statement|io_statement|return_statement
+type->integer|char|string
+arraytype->array [ type ]
+declaration_statement->declare type IDENTIFIER|declare arraytype IDENTIFIER
+assignment_statement->IDENTIFIER = expression
+arithmetic->+|-|/|*
+expression->int_expression|string_expression
+int_expression->integer|IDENTIFIER|int_expression arithmetic int_expression|( int_expression arithmetic int_expression )
+string_expression->string|string_expression + string_expression
+compound_statement-><newline> <indent> statement <newline>
+if_statement->if condition : compound_statement [ else : compound_statement ]
+while_statement->while condition : compound_statement
+condition->expression relation expression|condition and condition|condition or condition
+relation->==|<|>|=<|=>|!=
+loop_statement->loop IDENTIFIER to IDENTIFIER by integer : compound_statement|loop IDENTIFIER to integer by integer : compound_statement
+io_statement->input ( IDENTIFIER )|print ( IDENTIFIER )|print ( + constant )
+return_statement->return expression

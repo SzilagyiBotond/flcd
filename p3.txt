@@ -1,0 +1,21 @@
+
+declare integer n
+
+n=integer(input("The n"))
+
+declare integer i
+
+i=1
+
+declare integer number
+declare integer sum
+
+sum = 0
+
+loop i to n by 1:
+	number = integer(input("The number: "))
+	sum = sum + number
+
+print("The sum is: ")
+print(sum)
+

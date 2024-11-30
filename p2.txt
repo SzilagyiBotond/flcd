@@ -1,0 +1,26 @@
+////p2
+
+
+declare integer number1
+
+number1 = integer(input("WHat is the number: "))
+
+declare integer n
+
+declare integer flag
+
+flag = 1
+
+n = 2
+if number1 > 1:
+	loop n to number1/2 by 1:
+		if number1 % n:
+			flag = 0	
+			break
+	if flag == 0:
+		print("The number is not prime")
+	else:
+		print("The number is prime")
+else:
+	print("The number is not prime")
+  

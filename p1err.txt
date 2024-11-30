@@ -1,0 +1,22 @@
+declare integer number1
+declare integer 2number
+declare integer number3
+declare integer minimum
+
+number1=integer(input("First number: "))
+number2=integer(input("Second number: "))
+number3=integer(input("Third number: "))
+
+minimum=number1
+
+if number1 =< number2 and number1 =< number3:
+	minimum=number1
+else 
+	if number2 =< number1 && number2 =< number3:
+		minimum=number2
+else 
+	if number3 =< number1 && number3 =< than number2:
+		minimum=number3
+
+print("The minimum is: )
+print(minimum)  
