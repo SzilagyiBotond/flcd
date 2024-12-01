@@ -1,9 +1,6 @@
 package org.example;
 
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class LR {
     private final Grammar grammar;
@@ -82,31 +79,33 @@ public class LR {
                 )
         );
 
-        boolean modifed = false;
+        boolean modified = false;
 
-        do
-        {
-            modifed = false;
-            CanonicalCollection oldCanonicalCollection = canonicalCollection.copy();
+        do {
+            modified = false;
 
-            for(State state : canonicalCollection.getStates()){
-                for(String nonTerminal : enrichedGrammar.getNonTerminals()){
-                    State newState = goTo(state, nonTerminal);
-                    if(!canonicalCollection.getStates().contains(newState) && !newState.getItems().isEmpty()){
-                        oldCanonicalCollection.getStates().add(newState);
-                        modifed = true;
+            List<State> currentStates = new ArrayList<>(canonicalCollection.getStates());
+
+            for (State state : currentStates) {
+                for (String symbol : enrichedGrammar.getNonTerminals()) {
+                    State newState = goTo(state, symbol);
+
+                    if (!canonicalCollection.getStates().contains(newState) && !newState.getItems().isEmpty()) {
+                        canonicalCollection.addState(newState);
+                        modified = true;
                     }
                 }
 
-                for(String terminal : enrichedGrammar.getTerminals()){
+                for (String terminal : enrichedGrammar.getTerminals()) {
                     State newState = goTo(state, terminal);
-                    if(!canonicalCollection.getStates().contains(newState) && !newState.getItems().isEmpty()){
-                        oldCanonicalCollection.getStates().add(newState);
-                        modifed = true;
+
+                    if (!canonicalCollection.getStates().contains(newState) && !newState.getItems().isEmpty()) {
+                        canonicalCollection.addState(newState);
+                        modified = true;
                     }
                 }
             }
-        }while (modifed);
+        } while (modified);
 
         return  canonicalCollection;
     }
