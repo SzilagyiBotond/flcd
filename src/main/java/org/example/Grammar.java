@@ -9,19 +9,22 @@ import java.util.stream.Collectors;
 public class Grammar {
     private Set<String> nonTerminals;
     private Set<String> terminals;
-    private Map<List<String>, Set<List<String>>> productions;
+    private Map<List<String>, List<List<String>>> productions;
     private String startingSymbol;
     private boolean isCFG;
     private final String EPSILON = "EPSILON";
+    private boolean isEnriched;
+    public static String enrichedStartingGrammarSymbol = "S0";
 
     private void processProduction(String production) {
         String[] leftAndRightHandSide = production.split("->");
         List<String> splitLHS = List.of(leftAndRightHandSide[0].split(" "));
         String[] splitRHS = leftAndRightHandSide[1].split("\\|");
 
-        this.productions.putIfAbsent(splitLHS, new HashSet<>());
+        this.productions.putIfAbsent(splitLHS, new ArrayList<>() {
+        });
         for (String splitRH : splitRHS) {
-            this.productions.get(splitLHS).add(Arrays.stream(splitRH.split(" ")).toList());
+            this.productions.get(splitLHS).add(Arrays.stream(splitRH.split(" ")).collect(Collectors.toList()));
         }
 
     }
@@ -38,6 +41,7 @@ public class Grammar {
             }
 
             this.isCFG = this.checkIfCFG();
+            this.isEnriched = false;
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -70,6 +74,29 @@ public class Grammar {
         this.loadFromFile(filePath);
     }
 
+    public Grammar(Set<String> nonTerminals, Set<String> terminals, Map<List<String>, List<List<String>>> productions, String startingSymbol) {
+        this.nonTerminals = nonTerminals;
+        this.terminals = terminals;
+        this.productions = productions;
+        this.startingSymbol = startingSymbol;
+        this.isCFG = true;
+        this.isEnriched = true;
+    }
+
+    public Grammar createEnrichedGrammar(){
+        Grammar enrichedGrammar = new Grammar(nonTerminals, terminals, productions, enrichedStartingGrammarSymbol);
+
+        enrichedGrammar.nonTerminals.add(enrichedStartingGrammarSymbol);
+        enrichedGrammar.productions.putIfAbsent(List.of(enrichedStartingGrammarSymbol), new ArrayList<>());
+        enrichedGrammar.productions.get(List.of(enrichedStartingGrammarSymbol)).add(List.of(startingSymbol));
+
+        return enrichedGrammar;
+    }
+
+    public List<List<String>> getProductions(String nonTerminal){
+        return this.productions.get(List.of(nonTerminal));
+    }
+
     public Set<String> getNonTerminals() {
         return nonTerminals;
     }
@@ -86,11 +113,11 @@ public class Grammar {
         this.terminals = terminals;
     }
 
-    public Map<List<String>, Set<List<String>>> getProductions() {
+    public Map<List<String>, List<List<String>>> getProductions() {
         return productions;
     }
 
-    public void setProductions(Map<List<String>, Set<List<String>>> productions) {
+    public void setProductions(Map<List<String>, List<List<String>>> productions) {
         this.productions = productions;
     }
 

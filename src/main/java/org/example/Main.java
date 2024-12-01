@@ -45,10 +45,14 @@ public class Main {
 //
 //        }
 
-        Grammar g1 = new Grammar("G2.txt");
+        Grammar g1 = new Grammar("C:\\Users\\Marci\\Documents\\FLCD\\flcd\\src\\main\\java\\org\\example\\G1.txt");
         System.out.println(g1.getNonTerminals());
         System.out.println(g1.getTerminals());
         System.out.println(g1.getStartingSymbol());
         System.out.println(g1.isCFG());
+        LR lrAlg = new LR(g1);
+
+        System.out.println(lrAlg.getCanonicalCollection().getStates());
+
     }
 }
