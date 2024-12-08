@@ -1,4 +1,7 @@
-package org.example;
+package org.example.scanner;
+
+import org.example.utils.HashTable;
+import org.example.utils.Position;
 
 public class SymbolTable<T> {
     private HashTable<T> table;

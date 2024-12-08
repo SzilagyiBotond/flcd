@@ -1,7 +1,7 @@
 package org.example;
 
-import java.io.FileNotFoundException;
-import java.util.List;
+import org.example.parser.lr0.Grammar;
+import org.example.parser.lr0.LR;
 
 public class Main {
     public static void main(String[] args) {

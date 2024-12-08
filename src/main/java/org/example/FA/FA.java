@@ -1,4 +1,6 @@
-package org.example;
+package org.example.FA;
+
+import org.example.utils.Pair;
 
 import java.io.File;
 import java.io.FileNotFoundException;

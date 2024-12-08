@@ -1,9 +1,12 @@
-package org.example;
+package org.example.scanner;
+
+import org.example.utils.Pair;
+import org.example.utils.Position;
 
 import java.util.ArrayList;
 
 public class PIFList {
-    private ArrayList<Pair<String,Position>> pif;
+    private ArrayList<Pair<String, Position>> pif;
     private ArrayList<Types> types;
 
     public PIFList(){

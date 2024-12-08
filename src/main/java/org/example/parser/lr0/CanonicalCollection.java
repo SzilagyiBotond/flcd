@@ -1,8 +1,9 @@
-package org.example;
+package org.example.parser.lr0;
+
+import org.example.parser.state.State;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class CanonicalCollection {
     private List<State> states;

@@ -1,4 +1,7 @@
-package org.example;
+package org.example.parser.lr0;
+
+import org.example.parser.state.Item;
+import org.example.parser.state.State;
 
 import java.util.*;
 

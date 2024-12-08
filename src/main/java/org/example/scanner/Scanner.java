@@ -1,4 +1,8 @@
-package org.example;
+package org.example.scanner;
+
+import org.example.FA.FA;
+import org.example.utils.Pair;
+import org.example.utils.Position;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -140,7 +144,7 @@ public class Scanner {
         tokens.forEach(t->{
             String token = t.getFirst();
             if (reservedWords.contains(token)){
-                pifList.add(new Pair<>(token,new Position(-1,-1)),Types.RESERVED_WORD);
+                pifList.add(new Pair<>(token,new Position(-1,-1)), Types.RESERVED_WORD);
             }
             else if(operators.contains(token)){
                 pifList.add(new Pair<>(token,new Position(-1,-1)),Types.OPERATOR);

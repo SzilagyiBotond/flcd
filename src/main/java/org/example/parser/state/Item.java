@@ -1,4 +1,4 @@
-package org.example;
+package org.example.parser.state;
 
 import java.util.List;
 import java.util.Objects;

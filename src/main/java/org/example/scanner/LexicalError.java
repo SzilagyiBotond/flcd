@@ -1,4 +1,4 @@
-package org.example;
+package org.example.scanner;
 
 public class LexicalError extends RuntimeException {
     public LexicalError(String message) {
