@@ -19,7 +19,7 @@ public class LrTable {
         StringBuilder result = new StringBuilder("Parsing Table: \n");
 
         for (LrRow entry : entries) {
-            result.append(entry);
+            result.append(entry.prettyPrint());
             result.append("\n");
         }
 

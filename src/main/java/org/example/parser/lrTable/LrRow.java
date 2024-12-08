@@ -58,4 +58,29 @@ public class LrRow {
 
         }
     }
+    public StringBuilder prettyPrint() {
+        StringBuilder output = new StringBuilder();
+
+        // Print state information
+        output.append(String.format("%-20s %-20s\n", "State:", state.toString()));
+
+        // Print state action
+        output.append(String.format("%-20s %-20s\n", "State Action:", stateAction.toString()));
+
+        // Print gotoList
+        output.append("Goto List:\n");
+        for (Pair<String, State> pair : gotoList) {
+            output.append(String.format("  %-20s -> %-20s\n", pair.getFirst(), pair.getSecond()));
+        }
+
+        // Print reduce production, if applicable
+        if (reduceProduction != null) {
+            output.append("Reduce Production:\n");
+            output.append(String.format("  %-20s -> %-20s\n",
+                    String.join(" ", reduceProduction.getFirst()),
+                    String.join(" ", reduceProduction.getSecond())));
+        }
+
+        return output;
+    }
 }

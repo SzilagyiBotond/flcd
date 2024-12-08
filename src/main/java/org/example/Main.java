@@ -54,6 +54,7 @@ public class Main {
 
         System.out.println(lrAlg.getCanonicalCollection().getStates());
         System.out.println(lrAlg.getCanonicalCollection().getLrTable());
+        System.out.println(lrAlg.getLrTable(lrAlg.getCanonicalCollection()));
 
     }
 }
