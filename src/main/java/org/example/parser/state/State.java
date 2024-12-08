@@ -10,6 +10,10 @@ import java.util.Set;
 public class State {
     private Set<Item> items;
 
+    public Action getStateAction() {
+        return stateAction;
+    }
+
     private Action stateAction;
 
     public State(Set<Item> states){

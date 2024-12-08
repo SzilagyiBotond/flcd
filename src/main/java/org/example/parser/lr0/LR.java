@@ -1,5 +1,7 @@
 package org.example.parser.lr0;
 
+import org.example.parser.lrTable.LrRow;
+import org.example.parser.lrTable.LrTable;
 import org.example.parser.state.Item;
 import org.example.parser.state.State;
 
@@ -96,7 +98,10 @@ public class LR {
                     if (!canonicalCollection.getStates().contains(newState) && !newState.getItems().isEmpty()) {
                         canonicalCollection.addState(newState);
                         modified = true;
+
+                        canonicalCollection.addLrTable(state,symbol,newState);
                     }
+
                 }
 
                 for (String terminal : enrichedGrammar.getTerminals()) {
@@ -105,11 +110,21 @@ public class LR {
                     if (!canonicalCollection.getStates().contains(newState) && !newState.getItems().isEmpty()) {
                         canonicalCollection.addState(newState);
                         modified = true;
+                        canonicalCollection.addLrTable(state,terminal,newState);
                     }
                 }
             }
         } while (modified);
 
         return  canonicalCollection;
+    }
+
+    public LrTable getLrTable(CanonicalCollection canonicalCollection){
+        LrTable lrTable = new LrTable();
+        for(State state : canonicalCollection.getStates()){
+            LrRow row = new LrRow(state,canonicalCollection);
+            lrTable.addRow(row);
+        }
+        return lrTable;
     }
 }
