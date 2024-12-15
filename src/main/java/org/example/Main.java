@@ -3,8 +3,11 @@ package org.example;
 import org.example.parser.lr0.Grammar;
 import org.example.parser.lr0.LR;
 
+import java.io.IOException;
+import java.util.Stack;
+
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 //        SymbolTable<String> identifiers = new SymbolTable<>(10);
 //        SymbolTable<Integer> intConstants = new SymbolTable<>(10);
 //        SymbolTable<String> stringConstants = new SymbolTable<>(10);
@@ -45,7 +48,7 @@ public class Main {
 //
 //        }
 
-        Grammar g1 = new Grammar("G1.txt");
+        Grammar g1 = new Grammar("G3.txt");
         System.out.println(g1.getNonTerminals());
         System.out.println(g1.getTerminals());
         System.out.println(g1.getStartingSymbol());
@@ -56,5 +59,13 @@ public class Main {
         System.out.println(lrAlg.getCanonicalCollection().getLrTable());
         System.out.println(lrAlg.getLrTable(lrAlg.getCanonicalCollection()));
 
+        lrAlg.writeLrTableToFile(lrAlg.getCanonicalCollection(), "lrTable.txt");
+
+        Stack<String> inputStack = new Stack();
+        inputStack.push("c");
+        inputStack.push("b");
+        inputStack.push("b");
+        inputStack.push("a");
+        lrAlg.parse(inputStack, lrAlg.getLrTable(lrAlg.getCanonicalCollection()), "Input_Output/Out1.txt");
     }
 }

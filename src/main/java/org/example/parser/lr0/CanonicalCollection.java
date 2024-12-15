@@ -7,6 +7,7 @@ import java.util.*;
 
 public class CanonicalCollection {
     private List<State> states;
+    private Map<Pair<Integer, String>, Integer> adjacencyList;
 
     public Map<Pair<State, String>, State> getLrTable() {
         return lrTable;

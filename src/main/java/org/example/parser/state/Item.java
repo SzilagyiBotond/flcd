@@ -16,6 +16,10 @@ public class Item {
         return this.rhs;
     }
 
+    public boolean dotIsLast(){
+        return this.positionForDot == this.rhs.size();
+    }
+
     public Item(String leftHandSide, List<String> rightHandSide, Integer positionForDot) {
         this.lhs = leftHandSide;
         this.rhs = rightHandSide;
@@ -45,7 +49,14 @@ public class Item {
     }
 
     @Override
-    public boolean equals(Object item) {
-        return item instanceof Item && Objects.equals(((Item)item).lhs, this.lhs) && Objects.equals(((Item)item).rhs, this.rhs) && Objects.equals(((Item)item).positionForDot, this.positionForDot);
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true; // Same reference
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false; // Null or different class
+        }
+        Item other = (Item) obj;
+        return Objects.equals(other.toString(), this.toString());
     }
 }

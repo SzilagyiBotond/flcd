@@ -11,10 +11,10 @@ import java.util.List;
 import java.util.Map;
 
 public class LrRow {
-    private State state;
-    private Action stateAction;
-    private List<Pair<String,State>> gotoList;
-    private Pair<List<String>,List<String>> reduceProduction = null;
+    public State state;
+    public Action stateAction;
+    public List<Pair<String,State>> gotoList;
+    public Pair<List<String>,List<String>> reduceProduction = null;
 
     public LrRow(State state,CanonicalCollection collection) {
         this.state = state;
@@ -29,7 +29,7 @@ public class LrRow {
             case SHIFT -> {
                 for (Map.Entry<Pair<State,String>,State> entry: canonicalCollection.getLrTable().entrySet()){
                     Pair<State,String> pair = entry.getKey();
-                    if(pair.getFirst()==state){
+                    if(pair.getFirst().equals(state)){
                         gotoList.add(new Pair<>(pair.getSecond(),entry.getValue()));
                     }
                 }

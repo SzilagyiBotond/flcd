@@ -1,10 +1,12 @@
 package org.example.parser.lrTable;
 
+import org.example.parser.state.State;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class LrTable {
-    private List<LrRow> entries;
+    public List<LrRow> entries;
 
     public void addRow(LrRow row){
         entries.add(row);
@@ -13,6 +15,7 @@ public class LrTable {
     public LrTable() {
         this.entries = new ArrayList<>();
     }
+
 
     @Override
     public String toString() {

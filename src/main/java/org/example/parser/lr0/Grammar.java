@@ -1,5 +1,7 @@
 package org.example.parser.lr0;
 
+import org.example.utils.Pair;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
@@ -68,6 +70,19 @@ public class Grammar {
         }
 
         return true;
+    }
+
+    public List<Pair<String, List<String>>> getOrderedProductions() {
+
+        List<Pair<String, List<String>>> result = new ArrayList<>();
+
+        this.productions.forEach(
+                (lhs, rhs) -> rhs.forEach(
+                        (prod) -> result.add(new Pair<>(lhs.get(0), prod))
+                )
+        );
+
+        return result;
     }
 
     public Grammar(String filePath) {
