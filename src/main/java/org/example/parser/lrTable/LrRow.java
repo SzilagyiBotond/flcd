@@ -22,7 +22,7 @@ public class LrRow {
     }
 
     private void createTable(CanonicalCollection canonicalCollection){
-        gotoList = new ArrayList<Pair<String,State>>();
+        gotoList = new ArrayList<>();
         stateAction = state.getStateAction();
         switch(stateAction){
 

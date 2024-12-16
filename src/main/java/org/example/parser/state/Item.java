@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Objects;
 
 public class Item {
-    private String lhs;
-    private List<String> rhs;
-    private Integer positionForDot;
+    private final String lhs;
+    private final List<String> rhs;
+    private final Integer positionForDot;
 
     public String getLhs(){
         return this.lhs;
@@ -40,7 +40,7 @@ public class Item {
 
         String stringLeftHandSide2 = String.join("", rightHandSide2);
 
-        return lhs.toString() + "->" + stringRightHandSide1 + "." + stringLeftHandSide2;
+        return lhs + "->" + stringRightHandSide1 + "." + stringLeftHandSide2;
     }
 
     @Override

@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 public class State {
-    private Set<Item> items;
+    private final Set<Item> items;
 
     public Action getStateAction() {
         return stateAction;
@@ -29,7 +29,7 @@ public class State {
         } else if (items.stream().allMatch(item -> item.getRhs().size() > item.getPositionForDot())) {
             stateAction = Action.SHIFT;
         } else if (items.size()>1 && items.stream().allMatch(item -> item.getRhs().size() == item.getPositionForDot())) {
-            stateAction = Action.ACCEPT;
+            stateAction = Action.REDUCE_REDUCE_CONFLICT;
         }else{
             stateAction = Action.SHIFT_REDUCE_CONFLICT;
         }

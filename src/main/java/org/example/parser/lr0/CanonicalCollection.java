@@ -7,7 +7,6 @@ import java.util.*;
 
 public class CanonicalCollection {
     private List<State> states;
-    private Map<Pair<Integer, String>, Integer> adjacencyList;
 
     public Map<Pair<State, String>, State> getLrTable() {
         return lrTable;
@@ -25,7 +24,7 @@ public class CanonicalCollection {
     }
 
     public void addState(State state) {
-        this.states.add(states.size(), state);
+        this.states.add(state);
     }
 
     public List<State> getStates() {

@@ -14,7 +14,7 @@ import java.util.*;
 
 public class LR {
     private final Grammar grammar;
-    private Grammar enrichedGrammar;
+    private final Grammar enrichedGrammar;
     private List<Pair<String, List<String>>> orderedProductions;
     public LR(Grammar grammar) {
         this.grammar = grammar;
@@ -105,7 +105,9 @@ public class LR {
                         canonicalCollection.addState(newState);
                         modified = true;
                     }
-                    canonicalCollection.addLrTable(state,symbol,newState);
+                    if(!newState.getItems().isEmpty()){
+                        canonicalCollection.addLrTable(state,symbol,newState);
+                    }
                 }
 
                 for (String terminal : enrichedGrammar.getTerminals()) {
@@ -115,7 +117,9 @@ public class LR {
                         canonicalCollection.addState(newState);
                         modified = true;
                     }
-                    canonicalCollection.addLrTable(state,terminal,newState);
+                    if(!newState.getItems().isEmpty()){
+                        canonicalCollection.addLrTable(state,terminal,newState);
+                    }
                 }
             }
         } while (modified);
@@ -128,6 +132,7 @@ public class LR {
         Stack<String> outputStack = new Stack<>();
         Stack<Integer> outputNumberStack = new Stack<>();
 
+        //ez mi?
         String lastSymbol = "";
         State currentState = lrTable.entries.get(0).state;
 
@@ -171,19 +176,21 @@ public class LR {
                     }
                 } else if(entry.stateAction.equals(Action.REDUCE)) {
 
-                    List<String> reduceProdRhs = entry.reduceProduction.getSecond();
-
+                    List<String> reduceProdRhs = new ArrayList<>(entry.reduceProduction.getSecond());
+                    String reduceProdLhs = entry.reduceProduction.getFirst().get(0);
                     while(reduceProdRhs.contains(workingStack.peek().getFirst()) && !workingStack.isEmpty()){
                         reduceProdRhs.remove(workingStack.peek().getFirst());
                         workingStack.pop();
                     }
+                    //eddig jo
+
 
                     LrRow neededStateRow = lrTable.entries.stream()
                             .filter(lrRow -> lrRow.state.equals(workingStack.peek().getSecond()))
                             .findFirst().orElse(null);
 
                     Optional<Pair<String, State>> matchingPair = neededStateRow.gotoList.stream()
-                            .filter(pair -> pair.getFirst().equals(workingStack.peek().getFirst())).findFirst();
+                            .filter(pair -> pair.getFirst().equals(reduceProdLhs)).findFirst();
 
 
                     State lastState = new State(currentState.getItems());

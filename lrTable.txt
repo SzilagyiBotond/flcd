@@ -2,12 +2,8 @@ Parsing Table:
 State:               [S0->.S, S->.aA]    
 State Action:        SHIFT               
 Goto List:
-  A                    -> []                  
   S                    -> [S0->S.]            
-  S0                   -> []                  
   a                    -> [S->a.A, A->.bA, A->.c]
-  b                    -> []                  
-  c                    -> []                  
 
 State:               [S0->S.]            
 State Action:        ACCEPT              
@@ -17,9 +13,6 @@ State:               [S->a.A, A->.bA, A->.c]
 State Action:        SHIFT               
 Goto List:
   A                    -> [S->aA.]            
-  S                    -> []                  
-  S0                   -> []                  
-  a                    -> []                  
   b                    -> [A->b.A, A->.bA, A->.c]
   c                    -> [A->c.]             
 
@@ -33,9 +26,6 @@ State:               [A->b.A, A->.bA, A->.c]
 State Action:        SHIFT               
 Goto List:
   A                    -> [A->bA.]            
-  S                    -> []                  
-  S0                   -> []                  
-  a                    -> []                  
   b                    -> [A->b.A, A->.bA, A->.c]
   c                    -> [A->c.]             
 
