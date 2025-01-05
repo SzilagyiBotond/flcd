@@ -71,7 +71,6 @@ public class Tree {
             node.setLevel(level);
             node.setParent(parent);
 
-            // We create a new variable for the new level, which we are going to use to set the left child
             int newLevel = level + 1;
             if(newLevel > this.nextLevel)
                 this.nextLevel = newLevel;
@@ -79,13 +78,11 @@ public class Tree {
             this.currentIndex++;
             this.index++;
 
-            // We call the recursion to set the left child
             node.setlChild(buildFromParent(newLevel, node, productionString.getSecond(), input));
 
             List<String> newList = new ArrayList<>(rhs);
             newList.remove(0);
 
-            // We call the recursion to set the right sibling
             node.setrSibling(buildFromParent(level, parent, newList, input));
 
             return node;
