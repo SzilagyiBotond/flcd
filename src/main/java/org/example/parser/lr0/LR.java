@@ -5,6 +5,7 @@ import org.example.parser.lrTable.LrTable;
 import org.example.parser.state.Action;
 import org.example.parser.state.Item;
 import org.example.parser.state.State;
+import org.example.parser.tree.Tree;
 import org.example.utils.Pair;
 
 import java.io.BufferedWriter;
@@ -218,6 +219,12 @@ public class LR {
                     writeToFile(filePath, "Production strings: " + output);
                     System.out.println("Production number: " + numberOutput);
                     writeToFile(filePath, "Production number: " + numberOutput);
+
+                    Tree parseTree = new Tree(grammar);
+                    parseTree.generateTree(numberOutput);
+                    System.out.println("The output tree: ");
+                    writeToFile(filePath, "The output tree: ");
+                    parseTree.printTree(parseTree.getRoot(), filePath);
 
                     sem = false;
                 }
